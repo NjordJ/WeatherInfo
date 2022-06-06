@@ -19,12 +19,13 @@ void main(){
   });
 
   const tCityName = 'Moscow';
-  const tWeatherInfo = WeatherInfo(locationName: 'Moscow',
-                                  locationCountry: 'Russia',
-                                  temperatureCelsius: 15.2,
-                                  weatherDescription: 'Small rain',
-                                  windMph: 5.0,
-                                  windDir: 'N');
+  const tWeatherInfo = WeatherInfo(
+      locationName: 'Moscow',
+      locationCountry: 'Russia',
+      temperatureCelsius: 19.0,
+      weatherDescription: 'Partly cloudy',
+      windMph: 13.6,
+      windDir: 'NW');
 
   test(
     'should display display weather information in written city',

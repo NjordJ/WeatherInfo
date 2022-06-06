@@ -19,12 +19,13 @@ void main(){
     usecase = GetWeatherByRandomCity(mockWeatherInfoRepository);
   });
 
-  const tWeatherInfo = WeatherInfo(locationName: 'Moscow',
+  const tWeatherInfo = WeatherInfo(
+      locationName: 'Moscow',
       locationCountry: 'Russia',
-      temperatureCelsius: 15.2,
-      weatherDescription: 'Small rain',
-      windMph: 5.0,
-      windDir: 'N');
+      temperatureCelsius: 19.0,
+      weatherDescription: 'Partly cloudy',
+      windMph: 13.6,
+      windDir: 'NW');
 
   test(
       'should display display weather information in random city',
