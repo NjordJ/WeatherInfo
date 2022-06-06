@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:weather_info/core/usecases/usecase.dart';
 import 'package:weather_info/features/weather_check/domain/entities/weather_info.dart';
 import 'package:weather_info/features/weather_check/domain/repositories/weather_info_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_info/features/weather_check/domain/usecases/get_weather_by_city_name.dart';
+import 'package:weather_info/features/weather_check/domain/usecases/get_random_weather_by_city_name.dart';
 
 class MockWeatherInfoRepository extends Mock implements WeatherInfoRepository {
 
@@ -11,33 +12,32 @@ class MockWeatherInfoRepository extends Mock implements WeatherInfoRepository {
 
 void main(){
   late MockWeatherInfoRepository mockWeatherInfoRepository;
-  late GetWeatherInfoByCityName usecase;
+  late GetWeatherByRandomCity usecase;
 
   setUp((){
     mockWeatherInfoRepository = MockWeatherInfoRepository();
-    usecase = GetWeatherInfoByCityName(mockWeatherInfoRepository);
+    usecase = GetWeatherByRandomCity(mockWeatherInfoRepository);
   });
 
-  const tCityName = 'Moscow';
   const tWeatherInfo = WeatherInfo(locationName: 'Moscow',
-                                  locationCountry: 'Russia',
-                                  temperatureCelsius: 15.2,
-                                  weatherDescription: 'Small rain',
-                                  windMph: 5.0,
-                                  windDir: 'N');
+      locationCountry: 'Russia',
+      temperatureCelsius: 15.2,
+      weatherDescription: 'Small rain',
+      windMph: 5.0,
+      windDir: 'N');
 
   test(
-    'should display display weather information in written city',
-      () async {
+      'should display display weather information in random city',
+          () async {
         //arrange
-        when(()=>mockWeatherInfoRepository.getWeatherByCityName(any()))
+        when(()=>mockWeatherInfoRepository.getWeatherByRandomCity())
             .thenAnswer((realInvocation) async => const Right(tWeatherInfo));
         //act
-        final result = await usecase(const Params(cityName: tCityName));
+        final result = await usecase(NoParams());
 
         //assert
         expect(result, const Right(tWeatherInfo));
-        verify(() => mockWeatherInfoRepository.getWeatherByCityName(tCityName))
+        verify(() => mockWeatherInfoRepository.getWeatherByRandomCity())
             .called(1);
         verifyNoMoreInteractions(mockWeatherInfoRepository);
 

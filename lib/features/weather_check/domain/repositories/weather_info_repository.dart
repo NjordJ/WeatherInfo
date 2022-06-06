@@ -5,5 +5,5 @@ import '../../../../core/error/failures.dart';
 
 abstract class WeatherInfoRepository{
   Future<Either<Failure, WeatherInfo>> getWeatherByCityName(String city);
-  //Future<Either<Failure, WeatherInfo>> getRandomWeatherByCityName(String city);
+  Future<Either<Failure, WeatherInfo>> getWeatherByRandomCity();
 }
