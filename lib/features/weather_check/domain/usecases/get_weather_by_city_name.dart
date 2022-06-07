@@ -6,8 +6,8 @@ import 'package:weather_info/features/weather_check/domain/entities/weather_info
 import 'package:weather_info/features/weather_check/domain/repositories/weather_info_repository.dart';
 
 class GetWeatherInfoByCityName implements UseCase<WeatherInfo, Params> {
-  final WeatherInfoRepository repository;
 
+  final WeatherInfoRepository repository;
   GetWeatherInfoByCityName(this.repository);
 
   @override

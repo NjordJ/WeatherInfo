@@ -20,5 +20,4 @@ class WeatherInfo extends Equatable{
   @override
   List<Object?> get props => [locationName, locationCountry, temperatureCelsius, weatherDescription, windMph, windDir];
 
-
 }

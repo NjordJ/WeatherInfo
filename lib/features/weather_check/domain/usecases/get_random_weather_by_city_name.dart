@@ -6,8 +6,8 @@ import '../../../../core/usecases/usecase.dart';
 import '../repositories/weather_info_repository.dart';
 
 class GetWeatherByRandomCity implements UseCase<WeatherInfo, NoParams>{
-  final WeatherInfoRepository repository;
 
+  final WeatherInfoRepository repository;
   GetWeatherByRandomCity(this.repository);
 
   @override
