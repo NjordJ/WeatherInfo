@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:weather_info/core/error/exceptions.dart';
 import 'package:weather_info/core/error/failures.dart';
+import 'package:weather_info/features/weather_check/data/models/weather_info_model.dart';
 import 'package:weather_info/features/weather_check/domain/entities/weather_info.dart';
 import 'package:weather_info/features/weather_check/domain/repositories/weather_info_repository.dart';
 
@@ -10,16 +11,15 @@ import '../datasources/weather_info_remote_data_source.dart';
 
 typedef _ConcreteOrRandomChooser = Future<WeatherInfo> Function();
 
-class WeatherInfoRepositoryImpl implements WeatherInfoRepository{
+class WeatherInfoRepositoryImpl implements WeatherInfoRepository {
   final WeatherInfoRemoteDataSource remoteDataSource;
   final WeatherInfoLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
-  WeatherInfoRepositoryImpl({
-    required this.remoteDataSource,
-    required this.localDataSource,
-    required this.networkInfo
-  });
+  WeatherInfoRepositoryImpl(
+      {required this.remoteDataSource,
+      required this.localDataSource,
+      required this.networkInfo});
 
   @override
   Future<Either<Failure, WeatherInfo>> getWeatherByCityName(String city) async {
@@ -38,19 +38,19 @@ class WeatherInfoRepositoryImpl implements WeatherInfoRepository{
   }
 
   Future<Either<Failure, WeatherInfo>> _getWeather(
-      _ConcreteOrRandomChooser getConcreteOrRandom,
-      ) async {
-    if (await networkInfo.isConnected){
-      try{
+    _ConcreteOrRandomChooser getConcreteOrRandom,
+  ) async {
+    if (await networkInfo.isConnected) {
+      try {
         final remoteWeatherInfo = await getConcreteOrRandom();
         //TODO: check parameter should be model or entity
-        localDataSource.cacheWeatherInfo(remoteWeatherInfo);
+        localDataSource.cacheWeatherInfo(remoteWeatherInfo as WeatherInfoModel);
         return Right(remoteWeatherInfo);
-      }on ServerException {
+      } on ServerException {
         return Left(ServerFailure());
       }
-    }else{
-      try{
+    } else {
+      try {
         final localWeatherInfo = await localDataSource.getLastWeatherInfo();
         return Right(localWeatherInfo);
       } on CacheException {
@@ -58,5 +58,4 @@ class WeatherInfoRepositoryImpl implements WeatherInfoRepository{
       }
     }
   }
-
 }
