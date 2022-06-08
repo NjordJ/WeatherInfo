@@ -42,7 +42,7 @@ class WeatherInfoRepositoryImpl implements WeatherInfoRepository {
   ) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteWeatherInfo = await getConcreteOrRandom();
+        final WeatherInfo remoteWeatherInfo = await getConcreteOrRandom();
         //TODO: check parameter should be model or entity
         localDataSource.cacheWeatherInfo(remoteWeatherInfo as WeatherInfoModel);
         return Right(remoteWeatherInfo);

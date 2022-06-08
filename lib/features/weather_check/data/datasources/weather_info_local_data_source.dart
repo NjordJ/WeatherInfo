@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_info/core/error/exceptions.dart';
 import 'package:weather_info/features/weather_check/data/models/weather_info_model.dart';
 
@@ -9,4 +10,23 @@ abstract class WeatherInfoLocalDataSource {
   Future<WeatherInfoModel> getLastWeatherInfo();
 
   Future<void> cacheWeatherInfo(WeatherInfoModel weatherToCache);
+}
+
+class WeatherInfoLocalDataSourceImpl implements WeatherInfoLocalDataSource{
+  final SharedPreferences sharedPreferences;
+
+  WeatherInfoLocalDataSourceImpl({required this.sharedPreferences,});
+
+  @override
+  Future<WeatherInfoModel> getLastWeatherInfo() {
+    // TODO: implement getLastWeatherInfo
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> cacheWeatherInfo(WeatherInfoModel weatherToCache) {
+    // TODO: implement cacheWeatherInfo
+    throw UnimplementedError();
+  }
+  
 }
