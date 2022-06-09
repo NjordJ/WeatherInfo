@@ -23,7 +23,6 @@ class WeatherInfoRepositoryImpl implements WeatherInfoRepository {
 
   @override
   Future<Either<Failure, WeatherInfo>> getWeatherByCityName(String city) async {
-    // TODO: implement getWeatherByCityName
     return await _getWeather(() {
       return remoteDataSource.getWeatherByCityName(city);
     });
@@ -31,7 +30,6 @@ class WeatherInfoRepositoryImpl implements WeatherInfoRepository {
 
   @override
   Future<Either<Failure, WeatherInfo>> getWeatherByRandomCity() async {
-    // TODO: implement getWeatherByRandomCity
     return await _getWeather(() {
       return remoteDataSource.getWeatherByRandomCity();
     });
@@ -43,7 +41,6 @@ class WeatherInfoRepositoryImpl implements WeatherInfoRepository {
     if (await networkInfo.isConnected) {
       try {
         final WeatherInfo remoteWeatherInfo = await getConcreteOrRandom();
-        //TODO: check parameter should be model or entity
         localDataSource.cacheWeatherInfo(remoteWeatherInfo as WeatherInfoModel);
         return Right(remoteWeatherInfo);
       } on ServerException {

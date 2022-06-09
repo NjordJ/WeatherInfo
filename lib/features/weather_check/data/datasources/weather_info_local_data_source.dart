@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_info/core/error/exceptions.dart';
 import 'package:weather_info/features/weather_check/data/models/weather_info_model.dart';
@@ -12,6 +14,9 @@ abstract class WeatherInfoLocalDataSource {
   Future<void> cacheWeatherInfo(WeatherInfoModel weatherToCache);
 }
 
+// ignore: constant_identifier_names
+const String CACHED_WEATHER_INFO = 'CACHED_WEATHER_INFO';
+
 class WeatherInfoLocalDataSourceImpl implements WeatherInfoLocalDataSource{
   final SharedPreferences sharedPreferences;
 
@@ -20,13 +25,18 @@ class WeatherInfoLocalDataSourceImpl implements WeatherInfoLocalDataSource{
   @override
   Future<WeatherInfoModel> getLastWeatherInfo() {
     // TODO: implement getLastWeatherInfo
-    throw UnimplementedError();
+    final jsonString = sharedPreferences.getString(CACHED_WEATHER_INFO);
+    if(jsonString != null){
+      return Future.value(WeatherInfoModel.fromJson(jsonDecode(jsonString)));
+    } else {
+      throw CacheException();
+    }
   }
 
   @override
   Future<void> cacheWeatherInfo(WeatherInfoModel weatherToCache) {
     // TODO: implement cacheWeatherInfo
-    throw UnimplementedError();
+    return sharedPreferences.setString(CACHED_WEATHER_INFO, jsonEncode(weatherToCache.toJson()));
   }
   
 }

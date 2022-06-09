@@ -33,7 +33,7 @@ void main() {
       //assert
       expect(result, tWeatherInfoModel);
     });
-    //TODO: check for errors
+
     test('should return a json map containing correct data', () async {
       //act
       final result = tWeatherInfoModel.toJson();
