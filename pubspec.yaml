@@ -17,6 +17,7 @@ dependencies:
   #Service locator
   get_it: ^7.2.0
   #BLoC for state management
+  bloc: ^8.0.3
   flutter_bloc: ^8.0.1
   #Value equality
   equatable: ^2.0.3
@@ -24,6 +25,7 @@ dependencies:
   dartz: ^0.10.1
   #Remote API
   http: ^0.13.4
+  #dio: ^4.0.6
   internet_connection_checker: ^0.0.1+3
   #Local cache
   shared_preferences: ^2.0.15
