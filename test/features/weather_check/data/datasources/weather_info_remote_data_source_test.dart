@@ -11,11 +11,12 @@ import '../../../../fixtures/fixture_reader.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 
-class MockRemoteDataSource extends Mock implements WeatherInfoRemoteDataSource {}
+class MockRemoteDataSource extends Mock implements WeatherInfoRemoteDataSource {
+}
 
 class FakeUri extends Fake implements Uri {}
 
-void main(){
+void main() {
   late MockHttpClient httpClient;
   late WeatherInfoRemoteDataSourceImpl dataSourceImpl;
 
@@ -41,112 +42,93 @@ void main(){
   group('get weather info by city name', () {
     const tCity = 'Moscow';
 
-    final tWeatherInfoModel = WeatherInfoModel.fromJson(jsonDecode(fixture('weather.json')));
+    final tWeatherInfoModel =
+        WeatherInfoModel.fromJson(jsonDecode(fixture('weather.json')));
 
     test(
         'should perform a GET request on a URL with a city being the endpoint '
-        'with content type application/json headers',
-        () async {
+        'with content type application/json headers', () async {
       //arrange
-          setUpMockHttpClientSuccess200();
+      setUpMockHttpClientSuccess200();
       //act
       dataSourceImpl.getWeatherByCityName(tCity);
       //assert
       verify(() => httpClient.get(
-              Uri.parse(
-                  'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$tCity&aqi=no'
-              ),
-              headers: {
-                'Content-type': 'application/json'
-              })).called(1);
+          Uri.parse(
+              'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$tCity&aqi=no'),
+          headers: {'Content-type': 'application/json'})).called(1);
+    });
+
+    test('should return weather info when response code is 200 (success) ',
+        () async {
+      //arrange
+      setUpMockHttpClientSuccess200();
+      //act
+      final result = await dataSourceImpl.getWeatherByCityName(tCity);
+      //assert
+      verify(() => httpClient.get(
+          Uri.parse(
+              'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$tCity&aqi=no'),
+          headers: {'Content-type': 'application/json'})).called(1);
+      expect(result, equals(tWeatherInfoModel));
     });
 
     test(
-        'should return weather info when response code is 200 (success) ',
-            () async {
-          //arrange
-              setUpMockHttpClientSuccess200();
-          //act
-          final result = await dataSourceImpl.getWeatherByCityName(tCity);
-          //assert
-          verify(() => httpClient.get(
-              Uri.parse(
-                  'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$tCity&aqi=no'
-              ),
-              headers: {
-                'Content-type': 'application/json'
-              })).called(1);
-          expect(result, equals(tWeatherInfoModel));
-        });
-
-
-    test(
         'should throw server exception when the response code is not 200 (404, 300 e.t.c.)',
-            () async {
-          //arrange
-              setUpMockHttpClientFailure404();
-          //act
-          final call = dataSourceImpl.getWeatherByCityName;
-          //assert
-          expect(() => call(tCity), throwsA(isInstanceOf<ServerException>()));
-        });
-
+        () async {
+      //arrange
+      setUpMockHttpClientFailure404();
+      //act
+      final call = dataSourceImpl.getWeatherByCityName;
+      //assert
+      expect(() => call(tCity), throwsA(isInstanceOf<ServerException>()));
+    });
   });
 
   group('get weather info in random city', () {
     //City name gonna be chosen random from cities.json file
     const tCity = 'Moscow';
 
-    final tWeatherInfoModel = WeatherInfoModel.fromJson(jsonDecode(fixture('weather.json')));
+    final tWeatherInfoModel =
+        WeatherInfoModel.fromJson(jsonDecode(fixture('weather.json')));
 
     test(
         'should perform a GET request on a URL with a city being the endpoint '
-            'with content type application/json headers',
-            () async {
-          //arrange
-          setUpMockHttpClientSuccess200();
-          //act
-          dataSourceImpl.getWeatherByRandomCity();
-          //assert
-          verify(() => httpClient.get(
-              Uri.parse(
-                  'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$tCity&aqi=no'
-              ),
-              headers: {
-                'Content-type': 'application/json'
-              })).called(1);
-        });
+        'with content type application/json headers', () async {
+      //arrange
+      setUpMockHttpClientSuccess200();
+      //act
+      dataSourceImpl.getWeatherByRandomCity();
+      //assert
+      verify(() => httpClient.get(
+          Uri.parse(
+              'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$tCity&aqi=no'),
+          headers: {'Content-type': 'application/json'})).called(1);
+    });
 
-    test(
-        'should return weather info when response code is 200 (success) ',
-            () async {
-          //arrange
-          setUpMockHttpClientSuccess200();
-          //act
-          final result = await dataSourceImpl.getWeatherByRandomCity();
-          //assert
-          verify(() => httpClient.get(
-              Uri.parse(
-                  'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$tCity&aqi=no'
-              ),
-              headers: {
-                'Content-type': 'application/json'
-              })).called(1);
-          expect(result, equals(tWeatherInfoModel));
-        });
-
+    test('should return weather info when response code is 200 (success) ',
+        () async {
+      //arrange
+      setUpMockHttpClientSuccess200();
+      //act
+      final result = await dataSourceImpl.getWeatherByRandomCity();
+      //assert
+      verify(() => httpClient.get(
+          Uri.parse(
+              'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$tCity&aqi=no'),
+          headers: {'Content-type': 'application/json'})).called(1);
+      expect(result, equals(tWeatherInfoModel));
+    });
 
     test(
         'should throw server exception when the response code is not 200 (404, 300 e.t.c.)',
-            () async {
-          //arrange
-          setUpMockHttpClientFailure404();
-          //act
-          final call = dataSourceImpl.getWeatherByRandomCity;
-          //assert
-          expect(() => call(), throwsA(isInstanceOf<ServerException>()));
-        });
-
+        () async {
+      //arrange
+      setUpMockHttpClientFailure404();
+      //act
+      final call = dataSourceImpl.getWeatherByRandomCity;
+      //assert
+      expect(() => call(), throwsA(isInstanceOf<ServerException>()));
+    });
   });
-
 }

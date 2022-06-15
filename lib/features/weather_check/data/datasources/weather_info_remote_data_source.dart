@@ -25,7 +25,8 @@ class WeatherInfoRemoteDataSourceImpl implements WeatherInfoRemoteDataSource {
   WeatherInfoRemoteDataSourceImpl({required this.httpClient});
 
   @override
-  Future<WeatherInfoModel> getWeatherByCityName(String city) => _getWeatherInfo(city);
+  Future<WeatherInfoModel> getWeatherByCityName(String city) =>
+      _getWeatherInfo(city);
 
   @override
   Future<WeatherInfoModel> getWeatherByRandomCity() {
@@ -38,14 +39,10 @@ class WeatherInfoRemoteDataSourceImpl implements WeatherInfoRemoteDataSource {
   Future<WeatherInfoModel> _getWeatherInfo(String city) async {
     final result = await httpClient.get(
         Uri.parse(
-            'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$city&aqi=no'
-        ),
-        headers: {
-          'Content-type': 'application/json'
-        }
-    );
+            'http://api.weatherapi.com/v1/current.json?key=9c74fd81e58f44989c192430220406&q=$city&aqi=no'),
+        headers: {'Content-type': 'application/json'});
 
-    if(result.statusCode == 200){
+    if (result.statusCode == 200) {
       return WeatherInfoModel.fromJson(jsonDecode(result.body));
     } else {
       throw ServerException();
@@ -53,5 +50,4 @@ class WeatherInfoRemoteDataSourceImpl implements WeatherInfoRemoteDataSource {
   }
 
   void _getCities(String jsonPath) {}
-
 }

@@ -10,7 +10,8 @@ import 'package:weather_info/features/weather_check/data/models/weather_info_mod
 import 'package:weather_info/features/weather_check/data/repositories/weather_info_repository_impl.dart';
 import 'package:weather_info/features/weather_check/domain/entities/weather_info.dart';
 
-class MockRemoteDataSource extends Mock implements WeatherInfoRemoteDataSource {}
+class MockRemoteDataSource extends Mock implements WeatherInfoRemoteDataSource {
+}
 
 class MockLocalDataSource extends Mock implements WeatherInfoLocalDataSource {}
 
@@ -55,6 +56,7 @@ void main() {
   //Get weather in concrete city
   group('get weather info by city name', () {
     const tCity = 'Moscow';
+
     const WeatherInfoModel tWeatherInfoModel = WeatherInfoModel(
         locationName: tCity,
         locationCountry: 'Russia',
@@ -109,15 +111,15 @@ void main() {
           'should cache the data locally when the call to remote data source is successful',
           () async {
         //arrange
-            //Stubs used to make tests pass because of type 'Null' is not a subtype of type 'Future<WeatherInfo>' error
-            //Stub for mockRemoteDataSource.getWeatherByCityName
-            when(() => mockRemoteDataSource.getWeatherByCityName(any()))
-                .thenAnswer((_) async => tWeatherInfoModel);
-            //Stub for mockLocalDataSource.cacheWeatherInfo
-            when(() => mockLocalDataSource.cacheWeatherInfo(tWeatherInfoModel))
-                .thenAnswer((_) async => Future.value());
-            //Stub for mockNetworkInfo.isConnected
-            when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        //Stubs used to make tests pass because of type 'Null' is not a subtype of type 'Future<WeatherInfo>' error
+        //Stub for mockRemoteDataSource.getWeatherByCityName
+        when(() => mockRemoteDataSource.getWeatherByCityName(any()))
+            .thenAnswer((_) async => tWeatherInfoModel);
+        //Stub for mockLocalDataSource.cacheWeatherInfo
+        when(() => mockLocalDataSource.cacheWeatherInfo(tWeatherInfoModel))
+            .thenAnswer((_) async => Future.value());
+        //Stub for mockNetworkInfo.isConnected
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
         //act
         await repository.getWeatherByCityName(tCity);
         //assert
@@ -206,15 +208,15 @@ void main() {
           'should return remote data when call to remote data source is successful',
           () async {
         //arrange
-            //Stubs used to make tests pass because of type 'Null' is not a subtype of type 'Future<WeatherInfo>' error
-            //Stub for mockRemoteDataSource.getWeatherByCityName
-            when(() => mockRemoteDataSource.getWeatherByRandomCity())
-                .thenAnswer((_) async => tWeatherInfoModel);
-            //Stub for mockLocalDataSource.cacheWeatherInfo
-            when(() => mockLocalDataSource.cacheWeatherInfo(tWeatherInfoModel))
-                .thenAnswer((_) async => Future.value());
-            //Stub for mockNetworkInfo.isConnected
-            when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        //Stubs used to make tests pass because of type 'Null' is not a subtype of type 'Future<WeatherInfo>' error
+        //Stub for mockRemoteDataSource.getWeatherByCityName
+        when(() => mockRemoteDataSource.getWeatherByRandomCity())
+            .thenAnswer((_) async => tWeatherInfoModel);
+        //Stub for mockLocalDataSource.cacheWeatherInfo
+        when(() => mockLocalDataSource.cacheWeatherInfo(tWeatherInfoModel))
+            .thenAnswer((_) async => Future.value());
+        //Stub for mockNetworkInfo.isConnected
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
         //act
         final result = await repository.getWeatherByRandomCity();
         //assert
@@ -226,15 +228,15 @@ void main() {
           'should cache the data locally when the call to remote data source is successful',
           () async {
         //arrange
-            //Stubs used to make tests pass because of type 'Null' is not a subtype of type 'Future<WeatherInfo>' error
-            //Stub for mockRemoteDataSource.getWeatherByCityName
-            when(() => mockRemoteDataSource.getWeatherByRandomCity())
-                .thenAnswer((_) async => tWeatherInfoModel);
-            //Stub for mockLocalDataSource.cacheWeatherInfo
-            when(() => mockLocalDataSource.cacheWeatherInfo(tWeatherInfoModel))
-                .thenAnswer((_) async => Future.value());
-            //Stub for mockNetworkInfo.isConnected
-            when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        //Stubs used to make tests pass because of type 'Null' is not a subtype of type 'Future<WeatherInfo>' error
+        //Stub for mockRemoteDataSource.getWeatherByCityName
+        when(() => mockRemoteDataSource.getWeatherByRandomCity())
+            .thenAnswer((_) async => tWeatherInfoModel);
+        //Stub for mockLocalDataSource.cacheWeatherInfo
+        when(() => mockLocalDataSource.cacheWeatherInfo(tWeatherInfoModel))
+            .thenAnswer((_) async => Future.value());
+        //Stub for mockNetworkInfo.isConnected
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
         //act
         await repository.getWeatherByRandomCity();
         //assert
