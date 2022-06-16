@@ -2,17 +2,14 @@ part of 'weather_info_bloc.dart';
 
 abstract class WeatherInfoState extends Equatable {
   const WeatherInfoState();
-}
 
-class Empty extends WeatherInfoState {
   @override
   List<Object> get props => [];
 }
 
-class Loading extends WeatherInfoState {
-  @override
-  List<Object> get props => [];
-}
+class Empty extends WeatherInfoState {}
+
+class Loading extends WeatherInfoState {}
 
 class Loaded extends WeatherInfoState {
   final WeatherInfo weatherInfo;
