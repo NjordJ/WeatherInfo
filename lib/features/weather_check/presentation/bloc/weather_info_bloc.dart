@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:weather_info/core/error/failures.dart';
+import 'package:weather_info/core/usecases/usecase.dart';
 
 import '../../../../core/utils/input_converter.dart';
 import '../../domain/entities/weather_info.dart';
@@ -54,9 +57,33 @@ class WeatherInfoBloc extends Bloc<WeatherInfoEvent, WeatherInfoState> {
       yield* inputEither.fold((failure) async* {
         yield const Error(message: invalid_input_message);
       }, (string) async* {
-        // ignore: avoid_print
-        print(string);
+        yield Loading();
+        final failureOrWeather =
+            await getWeatherInfoByCityName(Params(cityName: string));
+        yield* _eitherLoadedOrErrorState(failureOrWeather);
       });
+    } else if (event is GetWeatherInfoForRandomCity) {
+      yield Loading();
+      final failureOrWeather = await getWeatherByRandomCity(NoParams());
+      yield* _eitherLoadedOrErrorState(failureOrWeather);
+    }
+  }
+
+  Stream<WeatherInfoState> _eitherLoadedOrErrorState(
+      Either<Failure, WeatherInfo> failureOrWeather) async* {
+    yield failureOrWeather.fold(
+        (failure) => Error(message: _mapFailureToMessage(failure)),
+        (weather) => Loaded(weatherInfo: weather));
+  }
+
+  String _mapFailureToMessage(Failure failure) {
+    switch (failure.runtimeType) {
+      case ServerFailure:
+        return server_failure_message;
+      case CacheFailure:
+        return cache_failure_message;
+      default:
+        return 'Unexpecterd failure';
     }
   }
 }
