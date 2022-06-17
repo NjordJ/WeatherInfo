@@ -16,7 +16,7 @@ part 'weather_info_event.dart';
 part 'weather_info_state.dart';
 
 // ignore: constant_identifier_names
-const String server_failure_message = 'Server failrue';
+const String server_failure_message = 'Server failure';
 // ignore: constant_identifier_names
 const String cache_failure_message = 'Cache failure';
 // ignore: constant_identifier_names
@@ -83,7 +83,7 @@ class WeatherInfoBloc extends Bloc<WeatherInfoEvent, WeatherInfoState> {
       case CacheFailure:
         return cache_failure_message;
       default:
-        return 'Unexpecterd failure';
+        return 'Unexpected failure';
     }
   }
 }

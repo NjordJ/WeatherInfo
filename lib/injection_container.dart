@@ -16,7 +16,7 @@ import 'package:http/http.dart' as http;
 
 final sl = GetIt.instance;
 
-Future<void> init() async {
+void init() {
   //! Features - Weather Check
   // Bloc
   sl.registerFactory(() => WeatherInfoBloc(
@@ -48,8 +48,8 @@ Future<void> init() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   //! External
-  final sharedPreferences = await SharedPreferences.getInstance();
-  sl.registerLazySingleton(() => sharedPreferences);
+  sl.registerLazySingletonAsync<SharedPreferences>(
+      () => SharedPreferences.getInstance());
   sl.registerLazySingleton(() => http.Client);
   sl.registerLazySingleton(() => InternetConnectionChecker());
 }
