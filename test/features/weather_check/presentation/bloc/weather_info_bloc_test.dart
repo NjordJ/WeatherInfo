@@ -1,4 +1,3 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -8,7 +7,7 @@ import 'package:weather_info/core/utils/input_converter.dart';
 import 'package:weather_info/features/weather_check/domain/entities/weather_info.dart';
 import 'package:weather_info/features/weather_check/domain/usecases/get_random_weather_by_city_name.dart';
 import 'package:weather_info/features/weather_check/domain/usecases/get_weather_by_city_name.dart';
-import 'package:weather_info/features/weather_check/presentation/bloc/weather_info_bloc.dart';
+import 'package:weather_info/features/weather_check/presentation/bloc/bloc.dart';
 
 class MockGetWeatherInfoByCityName extends Mock
     implements GetWeatherInfoByCityName {}

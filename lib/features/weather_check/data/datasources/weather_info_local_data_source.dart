@@ -17,16 +17,17 @@ abstract class WeatherInfoLocalDataSource {
 // ignore: constant_identifier_names
 const String CACHED_WEATHER_INFO = 'CACHED_WEATHER_INFO';
 
-class WeatherInfoLocalDataSourceImpl implements WeatherInfoLocalDataSource{
+class WeatherInfoLocalDataSourceImpl implements WeatherInfoLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  WeatherInfoLocalDataSourceImpl({required this.sharedPreferences,});
+  WeatherInfoLocalDataSourceImpl({
+    required this.sharedPreferences,
+  });
 
   @override
   Future<WeatherInfoModel> getLastWeatherInfo() {
-    // TODO: implement getLastWeatherInfo
     final jsonString = sharedPreferences.getString(CACHED_WEATHER_INFO);
-    if(jsonString != null){
+    if (jsonString != null) {
       return Future.value(WeatherInfoModel.fromJson(jsonDecode(jsonString)));
     } else {
       throw CacheException();
@@ -35,8 +36,7 @@ class WeatherInfoLocalDataSourceImpl implements WeatherInfoLocalDataSource{
 
   @override
   Future<void> cacheWeatherInfo(WeatherInfoModel weatherToCache) {
-    // TODO: implement cacheWeatherInfo
-    return sharedPreferences.setString(CACHED_WEATHER_INFO, jsonEncode(weatherToCache.toJson()));
+    return sharedPreferences.setString(
+        CACHED_WEATHER_INFO, jsonEncode(weatherToCache.toJson()));
   }
-  
 }

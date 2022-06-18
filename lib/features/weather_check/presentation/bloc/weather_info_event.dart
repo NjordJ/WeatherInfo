@@ -1,4 +1,4 @@
-part of 'weather_info_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class WeatherInfoEvent extends Equatable {
   const WeatherInfoEvent();

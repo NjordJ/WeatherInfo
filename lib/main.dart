@@ -3,7 +3,7 @@ import 'package:weather_info/features/weather_check/presentation/pages/weather_i
 import 'injection_container.dart' as di;
 
 void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   di.init();
   runApp(const MyApp());
 }
