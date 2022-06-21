@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_info/features/weather_check/presentation/bloc/weather_info_bloc.dart';
-
-import '../bloc/weather_info_event.dart';
+import 'package:weather_info/features/weather_check/presentation/bloc/bloc.dart';
 
 class WeatherControls extends StatefulWidget {
   const WeatherControls({

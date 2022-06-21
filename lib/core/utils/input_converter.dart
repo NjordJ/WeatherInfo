@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
-
-import '../error/failures.dart';
+import 'package:weather_info/core/error/failures.dart';
 
 class InputConverter {
   Either<Failure, String> stringToUnsignedString(String str) {

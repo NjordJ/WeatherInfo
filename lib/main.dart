@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_info/features/weather_check/presentation/bloc/bloc.dart';
 import 'package:weather_info/features/weather_check/presentation/pages/weather_info_page.dart';
-import 'injection_container.dart' as di;
+import 'package:weather_info/injection_container.dart' as di;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  di.init();
+  await di.init();
+  await di.sl.allReady();
   runApp(const MyApp());
 }
 
@@ -14,9 +17,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //title: 'Weather info',
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(primaryColor: Colors.lightBlue.shade800),
-      home: const WeatherInfoPage(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Weather info'),
+        ),
+        body: Center(
+          // child: FutureBuilder(
+          //   future: di.init(),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       return BlocProvider<WeatherInfoBloc>(
+          //         create: (_) => di.sl<WeatherInfoBloc>(),
+          //         child: const WeatherInfoPage(),
+          //       );
+          //     } else {
+          //       return const CircularProgressIndicator();
+          //     }
+          //   },
+          // ),
+          //provider
+          child: BlocProvider<WeatherInfoBloc>(
+            create: (_) => di.sl<WeatherInfoBloc>(),
+            child: const WeatherInfoPage(),
+          ),
+        ),
+      ),
     );
   }
 }

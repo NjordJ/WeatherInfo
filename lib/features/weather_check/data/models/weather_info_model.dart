@@ -43,5 +43,4 @@ class WeatherInfoModel extends WeatherInfo {
       }
     };
   }
-
 }

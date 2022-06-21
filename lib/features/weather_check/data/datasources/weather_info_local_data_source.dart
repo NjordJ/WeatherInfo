@@ -18,7 +18,7 @@ abstract class WeatherInfoLocalDataSource {
 const String CACHED_WEATHER_INFO = 'CACHED_WEATHER_INFO';
 
 class WeatherInfoLocalDataSourceImpl implements WeatherInfoLocalDataSource {
-  final SharedPreferences sharedPreferences;
+  SharedPreferences sharedPreferences;
 
   WeatherInfoLocalDataSourceImpl({
     required this.sharedPreferences,

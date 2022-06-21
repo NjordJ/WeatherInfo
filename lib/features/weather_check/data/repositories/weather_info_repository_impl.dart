@@ -1,13 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:weather_info/core/error/exceptions.dart';
 import 'package:weather_info/core/error/failures.dart';
+import 'package:weather_info/core/platform/network_info.dart';
+import 'package:weather_info/features/weather_check/data/datasources/weather_info_local_data_source.dart';
+import 'package:weather_info/features/weather_check/data/datasources/weather_info_remote_data_source.dart';
 import 'package:weather_info/features/weather_check/data/models/weather_info_model.dart';
 import 'package:weather_info/features/weather_check/domain/entities/weather_info.dart';
 import 'package:weather_info/features/weather_check/domain/repositories/weather_info_repository.dart';
-
-import '../../../../core/platform/network_info.dart';
-import '../datasources/weather_info_local_data_source.dart';
-import '../datasources/weather_info_remote_data_source.dart';
 
 typedef _ConcreteOrRandomChooser = Future<WeatherInfo> Function();
 

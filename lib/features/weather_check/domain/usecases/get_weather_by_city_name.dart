@@ -6,17 +6,13 @@ import 'package:weather_info/features/weather_check/domain/entities/weather_info
 import 'package:weather_info/features/weather_check/domain/repositories/weather_info_repository.dart';
 
 class GetWeatherInfoByCityName implements UseCase<WeatherInfo, Params> {
-
   final WeatherInfoRepository repository;
   GetWeatherInfoByCityName(this.repository);
 
   @override
-  Future<Either<Failure, WeatherInfo>> call(
-      Params params
-      ) async {
+  Future<Either<Failure, WeatherInfo>> call(Params params) async {
     return await repository.getWeatherByCityName(params.cityName);
   }
-
 }
 
 class Params extends Equatable {

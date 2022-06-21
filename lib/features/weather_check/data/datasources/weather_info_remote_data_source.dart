@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
 import 'package:weather_info/core/error/exceptions.dart';
-
-import '../models/weather_info_model.dart';
+import 'package:weather_info/features/weather_check/data/models/weather_info_model.dart';
+import 'package:http/http.dart' as http;
 
 abstract class WeatherInfoRemoteDataSource {
   ///Calls the http://api.weatherapi.com/v1 endpoint.

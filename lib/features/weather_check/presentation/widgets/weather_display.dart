@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../domain/entities/weather_info.dart';
+import 'package:weather_info/features/weather_check/domain/entities/weather_info.dart';
 
 class WeatherDisplay extends StatelessWidget {
   final WeatherInfo weatherInfo;
