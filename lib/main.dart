@@ -7,7 +7,7 @@ import 'package:weather_info/injection_container.dart' as di;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  await di.sl.allReady();
+  //await di.sl.allReady();
   runApp(const MyApp());
 }
 
@@ -24,24 +24,24 @@ class MyApp extends StatelessWidget {
           title: const Text('Weather info'),
         ),
         body: Center(
-          // child: FutureBuilder(
-          //   future: di.init(),
-          //   builder: (context, snapshot) {
-          //     if (snapshot.hasData) {
-          //       return BlocProvider<WeatherInfoBloc>(
-          //         create: (_) => di.sl<WeatherInfoBloc>(),
-          //         child: const WeatherInfoPage(),
-          //       );
-          //     } else {
-          //       return const CircularProgressIndicator();
-          //     }
-          //   },
-          // ),
-          //provider
-          child: BlocProvider<WeatherInfoBloc>(
-            create: (_) => di.sl<WeatherInfoBloc>(),
-            child: const WeatherInfoPage(),
+          child: FutureBuilder(
+            future: di.sl.allReady(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return BlocProvider<WeatherInfoBloc>(
+                  create: (_) => di.sl<WeatherInfoBloc>(),
+                  child: const WeatherInfoPage(),
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
           ),
+          //provider
+          // child: BlocProvider<WeatherInfoBloc>(
+          //   create: (_) => di.sl<WeatherInfoBloc>(),
+          //   child: const WeatherInfoPage(),
+          // ),
         ),
       ),
     );

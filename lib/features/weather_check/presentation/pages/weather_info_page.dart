@@ -11,15 +11,6 @@ class WeatherInfoPage extends StatefulWidget {
 }
 
 class _WeatherInfoPageState extends State<WeatherInfoPage> {
-  //late final WeatherInfoBloc _weatherInfoBloc;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   //_weatherInfoBloc = sl<WeatherInfoBloc>();
-  //   //_weatherInfoBloc.add(const WeatherInfoEvent.loadArticles());
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -61,27 +52,6 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
         ),
         const WeatherControls(),
       ],
-    );
-  }
-
-  Widget _buildBloc(BuildContext context) {
-    return BlocBuilder<WeatherInfoBloc, WeatherInfoState>(
-      builder: (context, state) {
-        if (state is Empty) {
-          return const MessageDisplay(
-            message: 'Start searching!',
-          );
-        } else if (state is Loading) {
-          return const LoadingWidget();
-        } else if (state is Loaded) {
-          return WeatherDisplay(weatherInfo: state.weatherInfo);
-        } else if (state is Error) {
-          return MessageDisplay(
-            message: state.message,
-          );
-        }
-        return const SizedBox.shrink();
-      },
     );
   }
 }

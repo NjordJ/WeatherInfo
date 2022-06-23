@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:weather_info/core/error/exceptions.dart';
+import 'package:weather_info/core/utils/json_reader.dart';
 import 'package:weather_info/features/weather_check/data/models/weather_info_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,11 +30,10 @@ class WeatherInfoRemoteDataSourceImpl implements WeatherInfoRemoteDataSource {
       _getWeatherInfo(city);
 
   @override
-  Future<WeatherInfoModel> getWeatherByRandomCity() {
-    //TODO: implement choosing random city from cities.json
-    const _city = 'Moscow';
+  Future<WeatherInfoModel> getWeatherByRandomCity() async {
+    String city = await _getCity();
 
-    return _getWeatherInfo(_city);
+    return _getWeatherInfo(city);
   }
 
   Future<WeatherInfoModel> _getWeatherInfo(String city) async {
@@ -48,5 +49,18 @@ class WeatherInfoRemoteDataSourceImpl implements WeatherInfoRemoteDataSource {
     }
   }
 
-  void _getCities(String jsonPath) {}
+  Future<String> _getCity() async {
+    String jsonString = await loadFromAsset('cities.json');
+    final jsonDecoded = jsonDecode(jsonString);
+
+    int randomCountry = Random().nextInt(jsonDecoded.length - 0) + 0;
+    final List country = [];
+    String city = '';
+
+    country.addAll(jsonDecoded.values.elementAt(randomCountry));
+    int randomCityInCountry = Random().nextInt(country.length - 0) + 0;
+    city = country.elementAt(randomCityInCountry);
+
+    return city;
+  }
 }

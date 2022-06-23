@@ -34,7 +34,7 @@ void main() {
       //act
       final result = await dataSourceImpl.getLastWeatherInfo();
       //assert
-      verify(() => mockSharedPreferences.getString(CACHED_WEATHER_INFO))
+      verify(() => mockSharedPreferences.getString(cached_weather_info))
           .called(1);
       expect(result, equals(tWeatherInfoModel));
     });
@@ -68,7 +68,7 @@ void main() {
       //assert
       final expectedJsonString = jsonEncode(tWeatherInfoModel.toJson());
       verify(() => mockSharedPreferences.setString(
-          CACHED_WEATHER_INFO, expectedJsonString)).called(1);
+          cached_weather_info, expectedJsonString)).called(1);
     });
   });
 }

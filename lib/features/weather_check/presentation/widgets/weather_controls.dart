@@ -59,7 +59,7 @@ class _WeatherControlsState extends State<WeatherControls> {
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white24),
                 ),
-                onPressed: dispatchConcrete,
+                onPressed: dispatchRandom,
               ),
             ),
           ],
@@ -74,7 +74,7 @@ class _WeatherControlsState extends State<WeatherControls> {
         .add(GetWeatherInfoForConcreteCity(inputStr));
   }
 
-  void dispatchRandom(WeatherInfoBloc bloc) {
+  void dispatchRandom() {
     controller.clear();
     BlocProvider.of<WeatherInfoBloc>(context)
         .add(GetWeatherInfoForRandomCity());
