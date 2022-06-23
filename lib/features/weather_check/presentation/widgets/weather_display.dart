@@ -13,21 +13,40 @@ class WeatherDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 3,
-      child: Column(
-        children: [
-          Text(
-            weatherInfo.temperatureCelsius.toString(),
-            style: const TextStyle(fontSize: 50),
-          ),
-          Center(
-            child: SingleChildScrollView(
-              child: Text(
-                weatherInfo.locationName,
-                style: const TextStyle(fontSize: 25),
+      width: MediaQuery.of(context).size.height / 1.5,
+      child: Card(
+        color: Colors.indigo.shade900,
+        elevation: 1.0,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                weatherInfo.temperatureCelsius.toString() + '℃',
+                style: const TextStyle(fontSize: 50, color: Colors.white),
               ),
-            ),
+              Text(
+                weatherInfo.locationName,
+                style: const TextStyle(fontSize: 25, color: Colors.white),
+              ),
+              Text(
+                weatherInfo.locationCountry,
+                style: const TextStyle(fontSize: 25, color: Colors.white),
+              ),
+              Text(
+                weatherInfo.weatherDescription,
+                style: const TextStyle(fontSize: 25, color: Colors.white),
+              ),
+              Text(
+                'Wind dir: ' + weatherInfo.windDir,
+                style: const TextStyle(fontSize: 25, color: Colors.white),
+              ),
+              Text(
+                'Wind speed: ' + weatherInfo.windMph.toString() + ' mph',
+                style: const TextStyle(fontSize: 25, color: Colors.white),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

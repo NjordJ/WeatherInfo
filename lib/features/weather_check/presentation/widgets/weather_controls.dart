@@ -41,9 +41,9 @@ class _WeatherControlsState extends State<WeatherControls> {
                 // ignore: prefer_const_constructors
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.black54),
+                      MaterialStateProperty.all<Color>(Colors.indigo.shade900),
                   foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white24),
+                      MaterialStateProperty.all<Color>(Colors.white),
                 ),
                 onPressed: dispatchConcrete,
               ),
@@ -55,9 +55,9 @@ class _WeatherControlsState extends State<WeatherControls> {
                 // ignore: prefer_const_constructors
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.black54),
+                      MaterialStateProperty.all<Color>(Colors.indigo.shade900),
                   foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white24),
+                      MaterialStateProperty.all<Color>(Colors.white),
                 ),
                 onPressed: dispatchRandom,
               ),
