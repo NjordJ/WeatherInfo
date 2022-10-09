@@ -1,0 +1,50 @@
+name: weather_info
+description: Project about getting weather information in city
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  #DEFAULT sdk: ">=2.16.2 <3.0.0"
+  #NEED CHANGE TO >=2.17.0 <3.0.0
+  sdk: ">=2.16.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  #Service locator
+  get_it: ^7.2.0
+  #BLoC for state management
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
+  bloc_test: ^9.0.3
+  #Value equality
+  equatable: ^2.0.3
+  #Functional programming
+  dartz: ^0.10.1
+  #Remote API
+  http: ^0.13.4
+  #dio: ^4.0.6
+  internet_connection_checker: ^0.0.1+3
+  #Local cache
+  shared_preferences: ^2.0.15
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+  mocktail: ^0.3.0
+  build_runner: ^2.1.11
+
+
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+    - assets/jsons/cities.json
+
